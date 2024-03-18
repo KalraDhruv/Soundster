@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9924d69-c3e3-4e61-bc10-92d1fd6a4eff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/GUIPiano.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/demo1/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/guipiano/GUIPiano.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/guipiano/GUIPiano.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MusicMixer/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MusicMixer/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../deque/tests/ArrayDequeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../deque/tests/ArrayDequeTest.java" afterDir="false" />
     </list>

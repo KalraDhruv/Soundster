@@ -27,10 +27,10 @@ public class GUIPiano extends Application {
 
         Scene scene = new Scene(majorArcana,1300,500);
         scene.setFill(Color.WHITE);
-//        majorArcana.setOnKeyTyped(event->{
-//            char note = event.getCharacter().charAt(0);
-//
-//        });
+        scene.setOnKeyPressed(event->{
+            String note = event.getText();
+            text.setText(note);
+        });
         stage.setTitle("My love for piano is absolute");
         stage.setScene(scene);
         stage.show();
