@@ -1,11 +1,10 @@
-package org.example.guipiano;
+package files.piano;
+
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -13,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GUIPiano extends Application {
+public class HelloApplication extends Application {
 
     private final String inputs ="q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
     private int countInput=0;
@@ -28,9 +27,21 @@ public class GUIPiano extends Application {
         Scene scene = new Scene(majorArcana,1300,500);
         scene.setFill(Color.WHITE);
         scene.setOnKeyPressed(event->{
-            String note = event.getText();
-            text.setText(note);
+            char note = event.getText().charAt(0);
+            String string = note+"";
+            boolean condition = false;
+            for(int i=0;i<37;i++){
+                if(note==(inputs.charAt(i))){
+                    condition = true;
+                }
+            }
+            if(condition) {
+                text.setText(string);
+            }else{
+                text.setText("Invalid-Input");
+            }
         });
+
         stage.setTitle("My love for piano is absolute");
         stage.setScene(scene);
         stage.show();
@@ -84,4 +95,3 @@ public class GUIPiano extends Application {
     }
 
 }
-
