@@ -1,14 +1,13 @@
-package org.example.piano;
+package files.piano;
 
-import edu.princeton.cs.algs4.StdAudio;
-import edu.princeton.cs.algs4.StdDraw;
+import files.piano.PianoResources.StdDraw;
+import files.piano.PianoResources.GuitarString;
+import files.piano.PianoResources.StdAudio;
 
 
-
-import java.io.IOException;
 import java.util.Scanner;
 
-public class main {
+public class Player {
     public static void main(String[] args){
        /* Classic guitar has 6 strings and 19 frets. */
         // Inputs for 37 frequencies.
@@ -26,7 +25,6 @@ public class main {
        Scanner scanner = new Scanner(System.in);
 
        while(true){
-//           char input =  scanner.next().charAt(0);
            if(StdDraw.hasNextKeyTyped()) {
                char input = StdDraw.nextKeyTyped();
 
@@ -48,6 +46,5 @@ public class main {
                notes[j].tic();
            }
        }
-
     }
 }

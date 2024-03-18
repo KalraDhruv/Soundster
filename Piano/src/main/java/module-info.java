@@ -1,8 +1,9 @@
 module files.piano {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
-    opens files.piano to javafx.fxml;
     exports files.piano;
+    exports files.piano.PianoResources;
 }

@@ -1,4 +1,4 @@
-package org.example.piano;
+package files.piano.PianoResources;
 
 import java.lang.Math;
 
