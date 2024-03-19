@@ -1,4 +1,6 @@
 package files.piano;
+import files.piano.PianoResources.GuitarString;
+import files.piano.PianoResources.StdAudio;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,11 +14,23 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Piano extends Application {
-
+    private GuitarString[] notes = new GuitarString[37];
     private final String inputs ="q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
     private int countInput=0;
+
+    public Piano(){
+        logic();
+    }
+    private void logic(){
+        // Write code for all the prerequisites in order to make the sound work.
+        for(int i=0;i<37;i++){
+            double frequency =440* Math.pow(2,(i-24.0)/12.0);
+            notes[i] = new GuitarString(frequency);
+        }
+    }
     @Override
     public void start(Stage stage) throws IOException {
+
 
         Pane majorArcana = new Pane(pianoTiles());
         Text text = new Text(625,400,"I am a fool");
@@ -28,13 +42,18 @@ public class Piano extends Application {
         scene.setOnKeyPressed(event->{
             char note = event.getText().charAt(0);
             String string = note+"";
+
             boolean condition = false;
+
             for(int i=0;i<37;i++){
                 if(note==(inputs.charAt(i))){
+                    notes[i].pluck();
                     condition = true;
                 }
             }
+
             if(condition) {
+                sound();
                 text.setText(string);
             }else{
                 text.setText("Invalid-Input");
@@ -44,6 +63,16 @@ public class Piano extends Application {
         stage.setTitle("My love for piano is absolute");
         stage.setScene(scene);
         stage.show();
+    }
+    private void sound(){
+        double sample =0;
+        for(int j=0;j<37;j++){
+            sample += notes[j].sample();
+        }
+        StdAudio.play(sample);
+        for(int j=0;j<37;j++){
+            notes[j].tic();
+        }
     }
     private Rectangle whiteTile(int number){
         Rectangle white = new Rectangle(number + 100,100, 50,200 );

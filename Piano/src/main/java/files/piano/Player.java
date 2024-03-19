@@ -8,6 +8,8 @@ import files.piano.PianoResources.StdAudio;
 import java.util.Scanner;
 
 public class Player {
+    //Combine Player with GUI Piano
+
     public static void main(String[] args){
        /* Classic guitar has 6 strings and 19 frets. */
         // Inputs for 37 frequencies.
