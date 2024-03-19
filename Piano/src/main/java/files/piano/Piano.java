@@ -12,6 +12,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class Piano extends Application {
     private GuitarString[] notes = new GuitarString[37];
@@ -38,6 +39,8 @@ public class Piano extends Application {
         majorArcana.getChildren().add(text);
 
         Scene scene = new Scene(majorArcana,1300,500);
+        stage.setTitle("My love for piano is absolute");
+
         scene.setFill(Color.WHITE);
         scene.setOnKeyPressed(event->{
             char note = event.getText().charAt(0);
@@ -45,33 +48,42 @@ public class Piano extends Application {
 
             boolean condition = false;
 
-            for(int i=0;i<37;i++){
-                if(note==(inputs.charAt(i))){
+            for (int i = 0; i < 37; i++) {
+                if (note == (inputs.charAt(i))) {
                     notes[i].pluck();
                     condition = true;
+                    break;
                 }
             }
 
-            if(condition) {
+            if (condition) {
                 sound();
                 text.setText(string);
-            }else{
+            } else {
                 text.setText("Invalid-Input");
             }
         });
 
-        stage.setTitle("My love for piano is absolute");
         stage.setScene(scene);
         stage.show();
     }
     private void sound(){
-        double sample =0;
-        for(int j=0;j<37;j++){
-            sample += notes[j].sample();
-        }
-        StdAudio.play(sample);
-        for(int j=0;j<37;j++){
-            notes[j].tic();
+        Date date = new Date();
+        long timeInSeconds= date.getTime()/1000;
+        Date timer = new Date();
+        long timeKeeper = date.getTime()/1000;
+        while(timeKeeper - timeInSeconds != 2) {
+            timeKeeper = timer.getTime();
+            double sample = 0;
+            for (int j = 0; j < 37; j++) {
+                sample += notes[j].sample();
+            }
+
+            StdAudio.play(sample);
+
+            for (int j = 0; j < 37; j++) {
+                notes[j].tic();
+            }
         }
     }
     private Rectangle whiteTile(int number){

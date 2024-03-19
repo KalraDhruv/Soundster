@@ -41,6 +41,7 @@ public class GuitarString {
    /* Taking random numbers and making music */
 
    public void pluck() {
+      System.out.println("The string has been plucked.");
       for(int i=0;i<capacity;i++){
          double randomNumber = Math.random() - 0.5;
          buffer.removeLast();
