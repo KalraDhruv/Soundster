@@ -20,7 +20,6 @@ public class Piano extends Application {
     private int countInput=0;
 
     public Piano(){
-        logic();
     }
     private void logic(){
         // Write code for all the prerequisites in order to make the sound work.
@@ -31,6 +30,7 @@ public class Piano extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
+        logic();
 
 
         Pane majorArcana = new Pane(pianoTiles());
@@ -57,8 +57,8 @@ public class Piano extends Application {
             }
 
             if (condition) {
-                sound();
                 text.setText(string);
+                sound();
             } else {
                 text.setText("Invalid-Input");
             }
@@ -71,20 +71,24 @@ public class Piano extends Application {
         Date date = new Date();
         long timeInSeconds= date.getTime()/1000;
         Date timer = new Date();
-        long timeKeeper = date.getTime()/1000;
-        while(timeKeeper - timeInSeconds != 2) {
-            timeKeeper = timer.getTime();
+        long timeKeeper = timer.getTime()/1000;
+        while(timeKeeper - timeInSeconds < 2) {
+            timer = new Date();
+            timeKeeper = timer.getTime()/1000;
+            System.out.println("TimeKeeper: "+ timeKeeper);
+            System.out.println("TimeInSeconds: "+timeInSeconds);
+            System.out.println(timeKeeper - timeInSeconds);
             double sample = 0;
             for (int j = 0; j < 37; j++) {
                 sample += notes[j].sample();
             }
-
             StdAudio.play(sample);
-
             for (int j = 0; j < 37; j++) {
                 notes[j].tic();
             }
+            System.out.println("Is it running?");
         }
+        System.out.println("Sound process finished here.");
     }
     private Rectangle whiteTile(int number){
         Rectangle white = new Rectangle(number + 100,100, 50,200 );
@@ -133,5 +137,4 @@ public class Piano extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
