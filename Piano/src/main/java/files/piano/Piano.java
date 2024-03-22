@@ -15,12 +15,16 @@ import java.io.IOException;
 import java.util.Date;
 
 public class Piano extends Application {
+
     private GuitarString[] notes = new GuitarString[37];
     private final String inputs ="q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
     private int countInput=0;
+    private boolean soundFinished = true;
+    private boolean terminate = false;
 
     public Piano(){
     }
+
     private void logic(){
         // Write code for all the prerequisites in order to make the sound work.
         for(int i=0;i<37;i++){
@@ -28,20 +32,23 @@ public class Piano extends Application {
             notes[i] = new GuitarString(frequency);
         }
     }
+
     @Override
     public void start(Stage stage) throws IOException {
         logic();
 
-
+        // Generating a pane for piano.
         Pane majorArcana = new Pane(pianoTiles());
+
+        // Adding the text for showing inputs.
         Text text = new Text(625,400,"I am a fool");
-        text.setTextAlignment(TextAlignment.CENTER);
         majorArcana.getChildren().add(text);
 
+        // Generating a scene
         Scene scene = new Scene(majorArcana,1300,500);
         stage.setTitle("My love for piano is absolute");
 
-        scene.setFill(Color.WHITE);
+        // Operations when a key is pressed from the keyboard.
         scene.setOnKeyPressed(event->{
             char note = event.getText().charAt(0);
             String string = note+"";
@@ -56,27 +63,41 @@ public class Piano extends Application {
                 }
             }
 
+
             if (condition) {
+                // Showing the key pressed if the input is valid.
                 text.setText(string);
-                sound();
+                if(soundFinished){
+                    sound();
+                }else{
+                    // Terminate is not working in this.
+                    terminate = true;
+                    sound();
+                }
             } else {
+               // Showing that the input is invalid.
                 text.setText("Invalid-Input");
             }
         });
 
+        // Show the stage
         stage.setScene(scene);
         stage.show();
     }
     private void sound(){
+        soundFinished = false;
         Date date = new Date();
         long timeInSeconds= date.getTime()/1000;
         Date timer = new Date();
         long timeKeeper = timer.getTime()/1000;
         while(timeKeeper - timeInSeconds < 2) {
+
+            // Terminate not working.
+            if(terminate){
+                break;
+            }
             timer = new Date();
             timeKeeper = timer.getTime()/1000;
-            System.out.println("TimeKeeper: "+ timeKeeper);
-            System.out.println("TimeInSeconds: "+timeInSeconds);
             System.out.println(timeKeeper - timeInSeconds);
             double sample = 0;
             for (int j = 0; j < 37; j++) {
@@ -88,7 +109,9 @@ public class Piano extends Application {
             }
             System.out.println("Is it running?");
         }
+
         System.out.println("Sound process finished here.");
+        soundFinished =true;
     }
     private Rectangle whiteTile(int number){
         Rectangle white = new Rectangle(number + 100,100, 50,200 );
@@ -135,6 +158,7 @@ public class Piano extends Application {
     }
 
     public static void main(String[] args) {
+        // Launch the application.
         launch();
     }
 }
