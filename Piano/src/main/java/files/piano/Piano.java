@@ -1,5 +1,6 @@
 package files.piano;
 import files.piano.PianoResources.GuitarString;
+import files.piano.PianoResources.MultiTasker1;
 import files.piano.PianoResources.StdAudio;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -34,62 +35,84 @@ public class Piano extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-        logic();
-
-        // Generating a pane for piano.
-        Pane majorArcana = new Pane(pianoTiles());
-
-        // Adding the text for showing inputs.
-        Text text = new Text(625,400,"I am a fool");
-        majorArcana.getChildren().add(text);
-
-        // Generating a scene
-        Scene scene = new Scene(majorArcana,1300,500);
-        stage.setTitle("My love for piano is absolute");
-
-        // Operations when a key is pressed from the keyboard.
-        scene.setOnKeyPressed(event->{
-            char note = event.getText().charAt(0);
-            String string = note+"";
-
-            boolean condition = false;
-
-            for (int i = 0; i < 37; i++) {
-                if (note == (inputs.charAt(i))) {
-                    notes[i].pluck();
-                    condition = true;
-                    break;
-                }
-            }
-
-
-            if (condition) {
-                // Showing the key pressed if the input is valid.
-                text.setText(string);
-                if(soundFinished){
-                    sound();
-                }else{
-                    // Terminate is not working in this.
-                    terminate = true;
-                    sound();
-                }
-            } else {
-               // Showing that the input is invalid.
-                text.setText("Invalid-Input");
-            }
-        });
-
-        // Show the stage
-        stage.setScene(scene);
-        stage.show();
+//    public void start(Stage stage) throws IOException {
+//        logic();
+//
+//        // Generating a pane for piano.
+//        Pane majorArcana = new Pane(pianoTiles());
+//
+//        // Adding the text for showing inputs.
+//        Text text = new Text(625,400,"I am a fool");
+//        majorArcana.getChildren().add(text);
+//
+//        // Generating a scene
+//        Scene scene = new Scene(majorArcana,1300,500);
+//        stage.setTitle("My love for piano is absolute");
+//
+//        // Experimental Code
+//
+//        Rectangle rectangleCheckColor = new Rectangle(20,20);
+//        rectangleCheckColor.setFill(Color.WHITE);
+//        majorArcana.getChildren().add(rectangleCheckColor);
+//
+//        // Stay away
+//
+//        // Operations when a key is pressed from the keyboard.
+//        scene.setOnKeyPressed(event->{
+//            // For Key pressed color changed.
+//            rectangleCheckColor.setFill(Color.CRIMSON);
+//            char note = event.getText().charAt(0);
+//            String string = note+"";
+//
+//            boolean condition = false;
+//
+//            for (int i = 0; i < 37; i++) {
+//                if (note == (inputs.charAt(i))) {
+//                    notes[i].pluck();
+//                    condition = true;
+//                    break;
+//                }
+//            }
+//
+//
+//            if (condition) {
+//                // Showing the key pressed if the input is valid.
+//                text.setText(string);
+//                if(soundFinished){
+//                    sound();
+//                }else{
+//                    // Terminate is not working in this.
+//                    terminate = true;
+//                    sound();
+//                }
+//            } else {
+//               // Showing that the input is invalid.
+//                text.setText("Invalid-Input");
+//            }
+//        });
+//        scene.setOnKeyReleased(eventColor ->{
+//            rectangleCheckColor.setFill(Color.WHITE);
+//        });
+//
+//        // Show the stage
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+    public void start(Stage stage) throws IOException{
+       MultiTasker1 runner1 = new MultiTasker1();
+       MultiTasker1 runner2 = new MultiTasker1();
+       runner1.start();
+       runner2.start();
     }
+
+
     private void sound(){
         soundFinished = false;
         Date date = new Date();
         long timeInSeconds= date.getTime()/1000;
         Date timer = new Date();
         long timeKeeper = timer.getTime()/1000;
+
         while(timeKeeper - timeInSeconds < 2) {
 
             // Terminate not working.
@@ -113,6 +136,7 @@ public class Piano extends Application {
         System.out.println("Sound process finished here.");
         soundFinished =true;
     }
+
     private Rectangle whiteTile(int number){
         Rectangle white = new Rectangle(number + 100,100, 50,200 );
         white.setFill(Color.WHITE);
