@@ -20,11 +20,17 @@ public class Piano extends Application {
 
     private GuitarString[] notes = new GuitarString[37];
     private final String inputs ="q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+    private final String whiteInputs="qwertyuiop[zxcvbnm,./ ";
+    private final String blackInputs="245789-=dfgjk;,";
+    private ArrayDeque<Rectangle> whiteTiles;
+    private ArrayDeque<Rectangle> blackTiles;
     private int countInput =0;
     public ArrayDeque<Character> charArray = new ArrayDeque<>();
 
 
     private void logic(){
+        whiteTiles = new ArrayDeque<>();
+        blackTiles = new ArrayDeque<>();
         // Write code for all the prerequisites in order to make the sound work.
         for(int i=0;i<37;i++){
             double frequency =440* Math.pow(2,(i-24.0)/12.0);
@@ -54,9 +60,14 @@ public class Piano extends Application {
         scene.setOnKeyPressed(event->{
             System.out.println("Key has been pressed.");
             String character = event.getText();
-            System.out.println(character);
-            charArray.addFirst(character.charAt(0));
-            System.out.println(charArray);
+            char input = character.charAt(0);
+            charArray.addFirst(input);
+            if(characterChecker(input)){
+                text.setText(input+"");
+                tileHighlighter(input);
+            }else{
+                text.setText("Invalid-Input");
+            }
         });
 
         sound.start();
@@ -64,6 +75,28 @@ public class Piano extends Application {
         // Show the stage
         stage.setScene(scene);
         stage.show();
+    }
+    private void tileHighlighter(char input){
+        for(int i=0;i<whiteInputs.length();i++){
+            if(input == whiteInputs.charAt(i)){
+                Rectangle white = whiteTiles.get(i);
+                white.setFill(Color.CRIMSON);
+            }
+        }
+        for(int i=0;i<blackInputs.length();i++){
+            if(input==blackInputs.charAt(i)){
+                Rectangle black = blackTiles.get(i);
+                black.setFill(Color.GREY);
+            }
+        }
+    }
+    private boolean characterChecker(char c){
+        for(int i=0;i<37;i++){
+            if(c == inputs.charAt(i)){
+                return true;
+            }
+        }
+        return false;
     }
     public class SoundGenerator extends Thread{
         public void run(){
@@ -102,12 +135,13 @@ public class Piano extends Application {
         white.setStrokeWidth(2);
         white.setStroke(Color.GREY);
         countInput++;
+        whiteTiles.addLast(white);
         return white;
     }
     private Rectangle blackTile(int number){
         Rectangle black = new Rectangle(number+135,100,30,135);
-        Label text = new Label("   "+inputs.charAt(countInput));
         black.setFill(Color.BLACK);
+        blackTiles.addLast(black);
         return black;
     }
     private Pane pianoTiles(){
