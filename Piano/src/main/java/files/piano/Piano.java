@@ -64,7 +64,8 @@ public class Piano extends Application {
             charArray.addFirst(input);
             if(characterChecker(input)){
                 text.setText(input+"");
-                tileHighlighter(input);
+                TileHighlighter highlight = new TileHighlighter(input);
+                highlight.start();
             }else{
                 text.setText("Invalid-Input");
             }
@@ -76,20 +77,6 @@ public class Piano extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    private void tileHighlighter(char input){
-        for(int i=0;i<whiteInputs.length();i++){
-            if(input == whiteInputs.charAt(i)){
-                Rectangle white = whiteTiles.get(i);
-                white.setFill(Color.CRIMSON);
-            }
-        }
-        for(int i=0;i<blackInputs.length();i++){
-            if(input==blackInputs.charAt(i)){
-                Rectangle black = blackTiles.get(i);
-                black.setFill(Color.GREY);
-            }
-        }
-    }
     private boolean characterChecker(char c){
         for(int i=0;i<37;i++){
             if(c == inputs.charAt(i)){
@@ -98,6 +85,39 @@ public class Piano extends Application {
         }
         return false;
     }
+    public class TileHighlighter extends Thread{
+        private char input;
+        public TileHighlighter(Character input){
+            this.input = input;
+        }
+        public void run(){
+            for(int i=0;i<whiteInputs.length();i++){
+                if(input == whiteInputs.charAt(i)){
+                    Rectangle white = whiteTiles.get(i);
+                    white.setFill(Color.BLANCHEDALMOND);
+                    try {
+                        Thread.sleep(250);
+                    }catch(Exception e){
+
+                    }
+                    white.setFill(Color.WHITE);
+                }
+            }
+            for(int i=0;i<blackInputs.length();i++){
+                if(input==blackInputs.charAt(i)){
+                    Rectangle black = blackTiles.get(i);
+                    black.setFill(Color.GREY);
+                    try {
+                        Thread.sleep(250);
+                    }catch(Exception e){
+
+                    }
+                    black.setFill(Color.BLACK);
+                }
+            }
+        }
+    }
+
     public class SoundGenerator extends Thread{
         public void run(){
 
