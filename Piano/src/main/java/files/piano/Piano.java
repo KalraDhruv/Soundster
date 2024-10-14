@@ -1,20 +1,16 @@
 package files.piano;
 import files.piano.PianoResources.ArrayDeque;
 import files.piano.PianoResources.GuitarString;
-import files.piano.PianoResources.SoundGenerator;
 import files.piano.PianoResources.StdAudio;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
-import java.util.Date;
 
 public class Piano extends Application {
 
